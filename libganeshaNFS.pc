@@ -1,0 +1,11 @@
+prefix=/usr/local
+exec_prefix=${prefix}
+libdir=${exec_prefix}/lib
+includedir=${prefix}/include
+
+Name:  libganeshaNFS
+Description: NFS-GANESHA's "fuselike" library
+Requires:
+Version: 1.0.1
+Libs: -L${exec_prefix}/lib -lganeshaNFS
+Cflags: -I${prefix}/include

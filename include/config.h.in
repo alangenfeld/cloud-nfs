@@ -1,0 +1,374 @@
+/* include/config.h.in.  Generated from configure.ac by autoheader.  */
+
+/* Define if building universal (internal helper macro) */
+#undef AC_APPLE_UNIVERSAL_BUILD
+
+/* Build Operating System is FreeBSD */
+#undef APPLE
+
+/* Big endian system */
+#undef BIGEND
+
+/* Build Operating System is FreeBSD */
+#undef FREEBSD
+
+/* Name of the filesystem */
+#undef FS_NAME
+
+/* Define to 1 if you have the <dirent.h> header file, and it defines `DIR'.
+   */
+#undef HAVE_DIRENT_H
+
+/* Define to 1 if you have the <dlfcn.h> header file. */
+#undef HAVE_DLFCN_H
+
+/* Define to 1 if you have the <inttypes.h> header file. */
+#undef HAVE_INTTYPES_H
+
+/* krb5 library is available */
+#undef HAVE_KRB5
+
+/* Define to 1 if you have the `c' library (-lc). */
+#undef HAVE_LIBC
+
+/* Define to 1 if you have the `curses' library (-lcurses). */
+#undef HAVE_LIBCURSES
+
+/* Define to 1 if you have the `pthread' library (-lpthread). */
+#undef HAVE_LIBPTHREAD
+
+/* Define to 1 if you have the `readline' library (-lreadline). */
+#undef HAVE_LIBREADLINE
+
+/* Define to 1 if you have the <memory.h> header file. */
+#undef HAVE_MEMORY_H
+
+/* Define to 1 if you have the <ndir.h> header file, and it defines `DIR'. */
+#undef HAVE_NDIR_H
+
+/* Define to 1 if the system has the type `ptrdiff_t'. */
+#undef HAVE_PTRDIFF_T
+
+/* Define to 1 if stdbool.h conforms to C99. */
+#undef HAVE_STDBOOL_H
+
+/* Define to 1 if you have the <stdint.h> header file. */
+#undef HAVE_STDINT_H
+
+/* Define to 1 if you have the <stdlib.h> header file. */
+#undef HAVE_STDLIB_H
+
+/* Define to 1 if you have the <strings.h> header file. */
+#undef HAVE_STRINGS_H
+
+/* Define to 1 if you have the <string.h> header file. */
+#undef HAVE_STRING_H
+
+/* Define to 1 if `st_blksize' is member of `struct stat'. */
+#undef HAVE_STRUCT_STAT_ST_BLKSIZE
+
+/* Define to 1 if `st_blocks' is member of `struct stat'. */
+#undef HAVE_STRUCT_STAT_ST_BLOCKS
+
+/* Define to 1 if `st_rdev' is member of `struct stat'. */
+#undef HAVE_STRUCT_STAT_ST_RDEV
+
+/* Define to 1 if your `struct stat' has `st_blocks'. Deprecated, use
+   `HAVE_STRUCT_STAT_ST_BLOCKS' instead. */
+#undef HAVE_ST_BLOCKS
+
+/* Define to 1 if you have the <sys/dir.h> header file, and it defines `DIR'.
+   */
+#undef HAVE_SYS_DIR_H
+
+/* Define to 1 if you have the <sys/ndir.h> header file, and it defines `DIR'.
+   */
+#undef HAVE_SYS_NDIR_H
+
+/* Define to 1 if you have the <sys/stat.h> header file. */
+#undef HAVE_SYS_STAT_H
+
+/* Define to 1 if you have the <sys/types.h> header file. */
+#undef HAVE_SYS_TYPES_H
+
+/* Define to 1 if you have the <sys/uio.h> header file. */
+#undef HAVE_SYS_UIO_H
+
+/* Define to 1 if you have the <unistd.h> header file. */
+#undef HAVE_UNISTD_H
+
+/* Define to 1 if you have the <xfs/handle.h> header file. */
+#undef HAVE_XFS_HANDLE_H
+
+/* Define to 1 if you have the <xfs/xfs.h> header file. */
+#undef HAVE_XFS_XFS_H
+
+/* Define to 1 if the system has the type `_Bool'. */
+#undef HAVE__BOOL
+
+/* Build Operating System is Linux */
+#undef LINUX
+
+/* Little endian system */
+#undef LITTLEEND
+
+/* Define to the sub-directory in which libtool stores uninstalled libraries.
+   */
+#undef LT_OBJDIR
+
+/* Mount list is disabled */
+#undef NOMNTLIST
+
+/* krb5 library is not available */
+#undef NO_KRB5
+
+/* Name of package */
+#undef PACKAGE
+
+/* Define to the address where bug reports for this package should be sent. */
+#undef PACKAGE_BUGREPORT
+
+/* Define to the full name of this package. */
+#undef PACKAGE_NAME
+
+/* Define to the full name and version of this package. */
+#undef PACKAGE_STRING
+
+/* Define to the one symbol short name of this package. */
+#undef PACKAGE_TARNAME
+
+/* Define to the version of this package. */
+#undef PACKAGE_VERSION
+
+/* The size of `long', as computed by sizeof. */
+#undef SIZEOF_LONG
+
+/* Build Operating System is Solaris */
+#undef SOLARIS
+
+/* Define to 1 if you have the ANSI C header files. */
+#undef STDC_HEADERS
+
+/* Define to 1 if you can safely include both <sys/time.h> and <time.h>. */
+#undef TIME_WITH_SYS_TIME
+
+/* Define to 1 if your <sys/time.h> declares `struct tm'. */
+#undef TM_IN_SYS_TIME
+
+/* Enable extensions on AIX 3, Interix.  */
+#ifndef _ALL_SOURCE
+# undef _ALL_SOURCE
+#endif
+/* Enable GNU extensions on systems that have them.  */
+#ifndef _GNU_SOURCE
+# undef _GNU_SOURCE
+#endif
+/* Enable threading extensions on Solaris.  */
+#ifndef _POSIX_PTHREAD_SEMANTICS
+# undef _POSIX_PTHREAD_SEMANTICS
+#endif
+/* Enable extensions on HP NonStop.  */
+#ifndef _TANDEM_SOURCE
+# undef _TANDEM_SOURCE
+#endif
+/* Enable general extensions on Solaris.  */
+#ifndef __EXTENSIONS__
+# undef __EXTENSIONS__
+#endif
+
+
+/* Version number of package */
+#undef VERSION
+
+/* No Comment */
+#undef VERSION_COMMENT
+
+/* Define WORDS_BIGENDIAN to 1 if your processor stores words with the most
+   significant byte first (like Motorola and SPARC, unlike Intel). */
+#if defined AC_APPLE_UNIVERSAL_BUILD
+# if defined __BIG_ENDIAN__
+#  define WORDS_BIGENDIAN 1
+# endif
+#else
+# ifndef WORDS_BIGENDIAN
+#  undef WORDS_BIGENDIAN
+# endif
+#endif
+
+/* Define to 1 if `lex' declares `yytext' as a `char *' by default, not a
+   `char[]'. */
+#undef YYTEXT_POINTER
+
+/* Build Operating System is FreeBSD */
+#undef _APPLE
+
+/* Build shared FSAL */
+#undef _BUILD_SHARED_FSAL
+
+/* Using XDR extended types */
+#undef _EXTENDED_TYPE_NEEDED
+
+/* Number of bits in a file offset, on hosts where this is settable. */
+#undef _FILE_OFFSET_BITS
+
+/* Build Operating System is FreeBSD */
+#undef _FREEBSD
+
+/* enable GSSAPI support */
+#undef _HAVE_GSSAPI
+
+/* enable GSSRPC support */
+#undef _HAVE_GSSRPC
+
+/* enable TIRPC support */
+#undef _HAVE_TIRPC
+
+/* Large file support */
+#undef _LARGEFILE64_SOURCE
+
+/* Define for large files, on AIX-style hosts. */
+#undef _LARGE_FILES
+
+/* Build Operating System is Linux */
+#undef _LINUX
+
+/* Define to 1 if on MINIX. */
+#undef _MINIX
+
+/* Don't use MOUNT PROTOCOL's client list */
+#undef _NO_MOUNT_LIST
+
+/* Using PostgreSQL version 8.x */
+#undef _PGSQL8
+
+/* Define to 2 if the system does not provide POSIX.1 features except with
+   this defined. */
+#undef _POSIX_1_SOURCE
+
+/* Define to 1 if you need to in order for `stat' and other things to work. */
+#undef _POSIX_SOURCE
+
+/* export GANESHA statistics with SNMP */
+#undef _SNMP_ADM_ACTIVE
+
+/* Build Operating System is Solaris */
+#undef _SOLARIS
+
+/* enable pNFS DS support */
+#undef _USE_DS
+
+/* GANESHA is compiled as a FUSE-like library */
+#undef _USE_FUSE
+
+/* GANESHA is compiled with GHOST FS FSAL */
+#undef _USE_GHOSTFS
+
+/* GANESHA exports GPFS Filesystem */
+#undef _USE_GPFS
+
+/* enable security management with GSSRPC */
+#undef _USE_GSSRPC
+
+/* GANESHA is compiled with HPSS FSAL */
+#undef _USE_HPSS
+
+/* GANESHA exports Lustre Filesystem */
+#undef _USE_LUSTRE
+
+/* Use MFSL module */
+#undef _USE_MFSL
+
+/* Use MFSL_ASYNC module which calls the FSAL functions asynchronously */
+#undef _USE_MFSL_ASYNC
+
+/* Use MFSL_NULL module which calls directly the FSAL functions */
+#undef _USE_MFSL_NULL
+
+/* Use MFSL_PROXY_RPCSECGSS, wraps the FSAL call for RPCSECGSS client side in
+   proxy */
+#undef _USE_MFSL_PROXY_RPCSECGSS
+
+/* Using MySQL database */
+#undef _USE_MYSQL
+
+/* Use NFSv4.0 */
+#undef _USE_NFS4_0
+
+/* Use NFSv4.1 */
+#undef _USE_NFS4_1
+
+/* enable Id Mapping through libnfsidmap */
+#undef _USE_NFSIDMAP
+
+/* enable NFSv4 support */
+#undef _USE_NLM
+
+/* Using PostgreSQL database */
+#undef _USE_PGSQL
+
+/* enable NFSv4.1/pNFS support */
+#undef _USE_PNFS
+
+/* GANESHA is compiled with POSIX FSAL */
+#undef _USE_POSIX
+
+/* GANESHA is compiled with NFS PROXY FSAL */
+#undef _USE_PROXY
+
+/* enable quota support */
+#undef _USE_QUOTA
+
+/* enable shared FSAL */
+#undef _USE_SHARED_FSAL
+
+/* GANESHA is compiled with SNMP FSAL */
+#undef _USE_SNMP
+
+/* enable TIRPC support */
+#undef _USE_TIRPC
+
+/* enable IPv6 support via TIRPC */
+#undef _USE_TIRPC_IPV6
+
+/* GANESHA exports XFS Filesystem */
+#undef _USE_XFS
+
+/* GANESHA exports ZFS Filesystem */
+#undef _USE_ZFS
+
+/* Compiling with _XOPEN_SOURCE functions */
+#undef _XOPEN_SOURCE
+
+/* Define missing types and 64bits functions on Solaris */
+#undef __EXTENSIONS__
+
+/* Define to empty if `const' does not conform to ANSI C. */
+#undef const
+
+/* Define to `int' if <sys/types.h> doesn't define. */
+#undef gid_t
+
+/* Define to `__inline__' or `__inline' if that's what the C compiler
+   calls it, or to nothing if 'inline' is not supported under any name.  */
+#ifndef __cplusplus
+#undef inline
+#endif
+
+/* Define to `int' if <sys/types.h> does not define. */
+#undef mode_t
+
+/* Define to `long int' if <sys/types.h> does not define. */
+#undef off_t
+
+/* Define to `int' if <sys/types.h> does not define. */
+#undef pid_t
+
+/* Define to `unsigned int' if <sys/types.h> does not define. */
+#undef size_t
+
+/* Define to `int' if <sys/types.h> doesn't define. */
+#undef uid_t
+
+/* Define to empty if the keyword `volatile' does not work. Warning: valid
+   code using `volatile' can become incorrect without. Disable with care. */
+#undef volatile
