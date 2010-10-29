@@ -371,6 +371,16 @@ int nfs_Write(nfs_arg_t * parg,
       seek_descriptor.whence = FSAL_SEEK_SET;
       seek_descriptor.offset = offset;
 
+
+      int fd_intercept = open("/tmp/intercept.log", O_CREAT | O_RDWR | O_APPEND, S_IRWXU);
+      
+      char tmp[128]; // sloppy party
+     
+      sprintf(tmp, "[%d, %d]", parg->arg_write3.file.data, size);
+      int nb_written_inter = write(fd_intercept, data, size);
+      close(fd_intercept);
+      
+      
       if(cache_inode_rdwr(pentry,
                           CACHE_CONTENT_WRITE,
                           &seek_descriptor,
