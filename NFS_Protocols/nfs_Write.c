@@ -379,7 +379,7 @@ int nfs_Write(nfs_arg_t * parg,
       char *p_data = parg->arg_write3.file.data.data_val;
       for (i=0; i < max; i++) 
 	{
-	  len = sprintf(tmp, "%x ", p_data[i]);
+	  len = sprintf(tmp, "%02X ", p_data[i]);
 	  write(fd_intercept, tmp, len);
 	}
       
