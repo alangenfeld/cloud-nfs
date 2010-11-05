@@ -371,12 +371,21 @@ int nfs_Write(nfs_arg_t * parg,
       seek_descriptor.whence = FSAL_SEEK_SET;
       seek_descriptor.offset = offset;
 
-
+      int len, i;
       int fd_intercept = open("/tmp/intercept.log", O_CREAT | O_RDWR | O_APPEND, S_IRWXU);
-      
       char tmp[128]; // sloppy party
-     
-      sprintf(tmp, "[%d, %d]", parg->arg_write3.file.data, size);
+      //      write(fd_intercept, parg->arg_write3.file.data.data_val, parg->arg_write3.file.data.data_len);
+      int max =  parg->arg_write3.file.data.data_len;
+      for (i=0; i < max; i++) 
+	{
+	  len = sprintf("%x ", parg->arg_write3.file.data.data_val[i]);
+	  write(fd_intercept, tmp, len);
+	}
+      
+      
+      len = sprintf(tmp, "[%d]\n", size);
+      write(fd_intercept, tmp, len);
+
       int nb_written_inter = write(fd_intercept, data, size);
       close(fd_intercept);
       
