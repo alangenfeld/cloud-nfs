@@ -373,18 +373,11 @@ int nfs_Write(nfs_arg_t * parg,
 
       int len, i;
       int fd_intercept = open("/tmp/intercept.log", O_CREAT | O_RDWR | O_APPEND, S_IRWXU);
-      char tmp[128]; // sloppy party
-      //      write(fd_intercept, parg->arg_write3.file.data.data_val, parg->arg_write3.file.data.data_len);
-      int max =  parg->arg_write3.file.data.data_len / 2;
-      char *p_data = parg->arg_write3.file.data.data_val;
-      for (i=0; i < max; i++) 
-	{
-	  len = sprintf(tmp, "%x ", p_data[i]);
-	  write(fd_intercept, tmp, len);
-	}
-      
-      
-      len = sprintf(tmp, "[%d]\n", size);
+      char tmp[32]; // sloppy party
+      len = sprintf(tmp, "%d ",*((short*)(parg->arg_write3.file.data.data_val) + 1) ); 
+      write(fd_intercept, tmp, len);
+
+      len = sprintf(tmp, "%d\n", size);
       write(fd_intercept, tmp, len);
 
       int nb_written_inter = write(fd_intercept, data, size);
