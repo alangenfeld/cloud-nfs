@@ -1,4 +1,4 @@
 #!/bin/bash
 killall posix.ganesha.nfsd
-make install
+make install | grep warning
 posix.ganesha.nfsd -d

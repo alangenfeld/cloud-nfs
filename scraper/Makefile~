@@ -1,0 +1,5 @@
+scraper : scraper.c
+	gcc scraper.c -o scraper -Wall
+
+clean :  
+	rm scrape

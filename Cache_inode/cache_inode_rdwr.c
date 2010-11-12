@@ -367,6 +367,8 @@ cache_inode_status_t cache_inode_rdwr(cache_entry_t * pentry,
 #else
               fsal_status = FSAL_write(&(pentry->object.file.open_fd.fd),
                                        seek_descriptor, io_size, buffer, pio_size);
+
+
 #endif
 
               break;
