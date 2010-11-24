@@ -121,13 +121,6 @@ int mnt_Mnt(nfs_arg_t * parg /* IN      */ ,
   LogFullDebug(COMPONENT_NFSPROTO,
                     "REQUEST PROCESSING: Calling mnt_Mnt, version %u", preq->rq_vers);
 
-  char snoop_mesg[512] = "int mnt_Mnt(nfs_arg_t * parg (IN), exportlist_t * pexport (IN), \
-fsal_op_context_t * pcontext /* IN      */, cache_inode_client_t * pclient /* IN/OUT  */ , \
-            hash_table_t * ht /* IN/OUT  */, struct svc_req *preq /* IN      */, \
-            nfs_res_t * pres /* OUT     */ )\n\tNFS_Protocols/mnt_Mnt.c\n";
-  int snoop = open("/tmp/snoop.log", O_CREAT | O_RDWR | O_APPEND, S_IRWXU);
-	write(snoop, snoop_mesg, strlen(snoop_mesg));
-  close(snoop);
   /* Paranoid command to clean the result struct. */
   memset(pres, 0, sizeof(nfs_res_t));
 
