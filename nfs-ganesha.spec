@@ -215,7 +215,7 @@ This package contains a FSAL library compiled as a shared object. It can be load
 
 %build
 
-%configure  '--with-fsal=POSIX' '--with-db=MYSQL' 'CC=gcc -g' 'CFLAGS=-g' 'CXXFLAGS=-g'
+%configure  '--with-fsal=POSIX' 'CC=gcc -g' 'CFLAGS=-g' 'CXXFLAGS=-g'
 
 # try 1 recovery when there is a // make error, then use simple make at 2nd error 
 make %{?_smp_mflags}  || make %{?_smp_mflags}  || make
