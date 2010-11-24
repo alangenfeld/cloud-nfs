@@ -83,7 +83,8 @@ nfs_Write.lo: nfs_Write.c ../include/config.h /usr/include/stdio.h \
  ../include/cache_content.h ../include/cache_content_policy.h \
  ../include/nfs_exports.h ../include/nfs_creds.h \
  ../include/nfs_proto_functions.h ../include/nfs_tools.h \
- ../include/nfs_proto_tools.h ../include/stuff_alloc.h
+ ../include/nfs_proto_tools.h ../include/stuff_alloc.h ../include/fsal.h \
+ ../include/fsal_types.h ../include/fsal_glue.h
 
 ../include/config.h:
 
@@ -450,3 +451,9 @@ nfs_Write.lo: nfs_Write.c ../include/config.h /usr/include/stdio.h \
 ../include/nfs_proto_tools.h:
 
 ../include/stuff_alloc.h:
+
+../include/fsal.h:
+
+../include/fsal_types.h:
+
+../include/fsal_glue.h:
