@@ -10,7 +10,7 @@ FILE = open(fname, "r")
 
 header = FILE.readline()
 vals = header.split()
-bucketname = "cloudnfs"
+bucketname = "cs699wisc_samanas"
 
 "Get your developer keys from the .boto config file."
 config = boto.config
