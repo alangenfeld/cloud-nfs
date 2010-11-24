@@ -134,6 +134,13 @@ fsal_status_t fsal_internal_testAccess(fsal_op_context_t * p_context,   /* IN */
 int fsal_internal_path2fsname(char *rpath, char *fs_spec);
 
 /* All the call to FSAL to be wrapped */
+
+fsal_status_t POSIXFSAL_getPathFromHandle(posixfsal_op_context_t * p_context,   /* IN */
+                                     posixfsal_handle_t * object_handle,   /* IN */
+                                     int is_dir,                      /* IN */
+                                     fsal_path_t * p_fsalpath,        /* OUT */
+                                     struct stat * p_buffstat);        /* OUT */
+
 fsal_status_t POSIXFSAL_access(posixfsal_handle_t * p_object_handle,    /* IN */
                                posixfsal_op_context_t * p_context,      /* IN */
                                fsal_accessflags_t access_type,  /* IN */

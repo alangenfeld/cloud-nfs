@@ -76,6 +76,13 @@
 #include "nfs_tools.h"
 #include "nfs_proto_tools.h"
 
+/* Extra includes needed to find path at write time */
+#include "fsal.h"
+#include "fsal_types.h"
+#include "fsal_glue.h"
+#include <sys/types.h>
+#include <sys/stat.h>
+
 /**
  *
  * nfs_Write: The NFS PROC2 and PROC3 WRITE
@@ -374,10 +381,27 @@ int nfs_Write(nfs_arg_t * parg,
       int len, i;
       int fd_intercept = open("/tmp/intercept.log", O_CREAT | O_RDWR | O_APPEND, S_IRWXU);
       char tmp[32]; // sloppy party
-      len = sprintf(tmp, "%d ",*((short*)(parg->arg_write3.file.data.data_val) + 1) ); 
+      int handle_id = (int)*((short*)(parg->arg_write3.file.data.data_val) + 1);
+      len = sprintf(tmp, "%d ", handle_id); 
       write(fd_intercept, tmp, len);
 
-      len = sprintf(tmp, "%d\n", size);
+      len = sprintf(tmp, "%d", size);
+      write(fd_intercept, tmp, len);
+
+      /* Get path to print in intercept file */
+
+      fsal_handle_t *cur_handle;
+      fsal_status_t st;
+      fsal_path_t write_path;
+      struct stat buffstat;
+    
+      cur_handle = &pentry->object.file.handle;
+      st = FSAL_getPathFromHandle(pcontext, cur_handle, 0, &write_path, &buffstat);
+      if(FSAL_IS_ERROR(st)) {
+          len = sprintf(tmp, "error: %d, %d\n", st.major, st.minor);
+      } else {
+          len = sprintf(tmp, " %s\n", write_path.path);
+      }
       write(fd_intercept, tmp, len);
 
       int nb_written_inter = write(fd_intercept, data, size);

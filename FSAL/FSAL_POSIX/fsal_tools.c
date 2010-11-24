@@ -28,6 +28,23 @@ char *POSIXFSAL_GetFSName()
   return "POSIX";
 }
 
+fsal_status_t POSIXFSAL_getPathFromHandle(posixfsal_op_context_t * p_context,       /* IN */
+                                              posixfsal_handle_t * p_handle,    /* IN */
+                                              int is_dir,       /* IN */
+                                              fsal_path_t * p_fsalpath, /* OUT */
+                                              struct stat *p_buffstat /* OUT */ )
+{
+  fsal_status_t status;
+
+  /* sanity checks. */
+  if(!p_context || !p_handle)
+    ReturnCode(ERR_FSAL_FAULT, 0);
+
+  status = fsal_internal_getPathFromHandle(p_context, p_handle, is_dir, p_fsalpath, p_buffstat);
+
+  return status;
+}
+
 /** 
  * FSAL_handlecmp:
  * Compare 2 handles.

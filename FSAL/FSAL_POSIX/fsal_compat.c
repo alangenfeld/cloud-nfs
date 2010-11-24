@@ -17,6 +17,17 @@
 #include "fsal_glue.h"
 #include "fsal_internal.h"
 
+fsal_status_t WRAP_POSIXFSAL_getPathFromHandle(fsal_op_context_t * p_context,   /* IN */
+                                     fsal_handle_t * object_handle,   /* IN */
+                                     int is_dir,                      /* IN */
+                                     fsal_path_t * p_fsalpath,        /* OUT */
+                                     struct stat * p_buffstat)        /* OUT */
+{
+  return POSIXFSAL_getPathFromHandle((posixfsal_op_context_t *) p_context,
+                                     (posixfsal_handle_t *) object_handle, 
+                                     is_dir, p_fsalpath, p_buffstat);
+}
+
 fsal_status_t WRAP_POSIXFSAL_access(fsal_handle_t * object_handle,      /* IN */
                                     fsal_op_context_t * p_context,      /* IN */
                                     fsal_accessflags_t access_type,     /* IN */
@@ -669,6 +680,7 @@ fsal_status_t WRAP_POSIXFSAL_getextattrs(fsal_handle_t * p_filehandle, /* IN */
 }
 
 fsal_functions_t fsal_xfs_functions = {
+  .fsal_getPathFromHandle = WRAP_POSIXFSAL_getPathFromHandle,
   .fsal_access = WRAP_POSIXFSAL_access,
   .fsal_getattrs = WRAP_POSIXFSAL_getattrs,
   .fsal_setattrs = WRAP_POSIXFSAL_setattrs,

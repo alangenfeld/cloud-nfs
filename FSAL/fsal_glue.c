@@ -28,6 +28,16 @@ fsal_functions_t(*getfunctions) (void);
 fsal_const_t(*getconsts) (void);
 #endif                          /* _USE_SHARED_FSAL */
 
+fsal_status_t FSAL_getPathFromHandle(fsal_op_context_t * p_context,   /* IN */
+                                     fsal_handle_t * object_handle,   /* IN */
+                                     int is_dir,                      /* IN */
+                                     fsal_path_t * p_fsalpath,        /* OUT */
+                                     struct stat * p_buffstat)        /* OUT */
+{
+  return fsal_functions.fsal_getPathFromHandle(p_context, object_handle, is_dir,
+                                               p_fsalpath, p_buffstat);
+}
+
 fsal_status_t FSAL_access(fsal_handle_t * object_handle,        /* IN */
                           fsal_op_context_t * p_context,        /* IN */
                           fsal_accessflags_t access_type,       /* IN */

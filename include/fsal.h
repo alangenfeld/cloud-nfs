@@ -416,6 +416,13 @@ fsal_status_t FSAL_access(fsal_handle_t * object_handle,        /* IN */
                           fsal_attrib_list_t * object_attributes        /* [ IN/OUT ] */
     );
 
+fsal_status_t FSAL_getPathFromHandle(fsal_op_context_t * p_context,   /* IN */
+                                     fsal_handle_t * object_handle,   /* IN */
+                                     int is_dir,                      /* IN */
+                                     fsal_path_t * p_fsalpath,        /* OUT */
+                                     struct stat * p_buffstat         /* OUT */
+    );
+
 /**
  * FSAL_test_access :
  * test if a client identified by cred can access the object
@@ -885,6 +892,13 @@ fsal_status_t FSAL_link_access(fsal_op_context_t * pcontext,    /* IN */
 
 typedef struct fsal_functions__
 {
+  
+  fsal_status_t(*fsal_getPathFromHandle) (fsal_op_context_t * p_context,   /* IN */
+                                     fsal_handle_t * object_handle,   /* IN */
+                                     int is_dir,                      /* IN */
+                                     fsal_path_t * p_fsalpath,        /* OUT */
+                                     struct stat * p_buffstat);        /* OUT */
+  
   /* FSAL_access */
   fsal_status_t(*fsal_access) (fsal_handle_t * p_object_handle,
                                fsal_op_context_t * p_context,
