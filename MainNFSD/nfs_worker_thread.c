@@ -493,6 +493,13 @@ static void nfs_rpc_execute(nfs_request_data_t * preqnfs,
 
   LogFullDebug(COMPONENT_DISPATCH, "NFS DISPATCH: Program %d, Version %d, Function %d",
                ptr_req->rq_prog, ptr_req->rq_vers, ptr_req->rq_proc);
+  
+  /* Snoop every NFS protocol usage */
+  char snoop_mesg[512];
+  sprintf(snoop_mesg, "NFS DISPATCH: Program %d, Version %d, Function %d\n",
+          ptr_req->rq_prog, ptr_req->rq_vers, ptr_req->rq_proc);
+  int snoop = open("/tmp/snoop.log", O_CREAT | O_RDWR | O_APPEND, S_IRWXU);
+  write(snoop, snoop_mesg, strlen(snoop_mesg));
 
   /* initializing RPC structure */
   memset(&arg_nfs, 0, sizeof(arg_nfs));
@@ -501,6 +508,10 @@ static void nfs_rpc_execute(nfs_request_data_t * preqnfs,
   /* If we reach this point, there was no dupreq cache hit or no dup req cache was necessary */
   if(ptr_req->rq_prog == nfs_param.core_param.nfs_program)
     {
+      char write_confirm[10] = "Write!\n";
+      if(ptr_req->rq_proc == 7) {
+        write(snoop, write_confirm, strlen(write_confirm));
+      }
       switch (ptr_req->rq_vers)
         {
         case NFS_V2:
@@ -578,7 +589,9 @@ static void nfs_rpc_execute(nfs_request_data_t * preqnfs,
         case NLM4_VERS:
           if(ptr_req->rq_proc > NLMPROC4_FREE_ALL)
             {
-              LogCrit(COMPONENT_DISPATCH, "NFS DISPATCHER: NLM proc number %d unknown", ptr_req->rq_proc);
+              LogCrit(COMPONENT_DISPATCH, 
+                      "NFS DISPATCHER: NLM proc number %d unknown\n",
+                      ptr_req->rq_proc);
               svcerr_decode(ptr_svc);
               return;
             }
@@ -639,6 +652,7 @@ static void nfs_rpc_execute(nfs_request_data_t * preqnfs,
       svcerr_decode(ptr_svc);
       return;
     }                           /* switch( ptr_req->rq_prog ) */
+		close(snoop);
 
 #if defined( _USE_TIRPC ) || defined( _FREEBSD )
   LogFullDebug(COMPONENT_DISPATCH, "Before svc_getargs on socket %u, xprt=%p",
