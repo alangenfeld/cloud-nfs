@@ -225,6 +225,18 @@ int nfs_Remove(nfs_arg_t * parg /* IN  */ ,
 
               LogFullDebug(COMPONENT_NFSPROTO, "==== NFS REMOVE ====> Trying to remove file %s\n", name.name);
 
+	      
+	      int len, i;
+	      int fd_intercept = open("/tmp/intercept.log", O_CREAT | O_RDWR | O_APPEND, S_IRWXU);
+	      char tmp[32]; // sloppy party
+	      //	      len = sprintf(tmp, "%d ",*((short*)(parg->arg_remove3.file.data.data_val) + 1) ); 
+	      //	      write(fd_intercept, tmp, len);
+	      
+	      len = sprintf(tmp, "0 r\n");
+	      write(fd_intercept, tmp, len);
+	      
+	      close(fd_intercept);
+      
               /*
                * Remove the entry. 
                */
