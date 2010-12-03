@@ -5,13 +5,13 @@ import os
 import tempfile
 import pickle
 
-def send_file(tmpFileName) :
+def send_file(srcName, dstName) :
 #   "Create source and destination URIs."
-    src_uri = boto.storage_uri(tmpFileName, "file")
+    src_uri = boto.storage_uri(srcName, "file")
     dst_uri = boto.storage_uri("cloudnfs", "gs")
     
 #    "Create a new destination URI with the source file name as the object name."
-    new_dst_uri = dst_uri.clone_replace_name(tmpFileName)
+    new_dst_uri = dst_uri.clone_replace_name(dstName)
     
 #    "Create a new destination key object."
     dst_key = new_dst_uri.new_key()
@@ -26,7 +26,7 @@ def send_file(tmpFileName) :
     
 #    "Upload the file."
     dst_key.set_contents_from_file(tmp)
-    os.remove(tmpFileName)
+
     return
 
 
@@ -46,12 +46,10 @@ while 1: ################################################################
     vals = header.split()
     # v0 - num, v1 - size, v2 - path
 
-    tmpFileName = vals[0] 
-    tmpFile = open(tmpFileName, "w")
+    tmpFile = tempfile.NamedTemporaryFile()
     data = FILE.read(int(vals[1]))
     tmpFile.write(data)
-    tmpFile.close()
-    tmpFile = open(tmpFileName, "r")
+    dstName = vals[2]
 
     "Catch exception of creating new dictionary"
     try:
@@ -59,25 +57,25 @@ while 1: ################################################################
     # Happens if table.pkl does not exist
     except IOError:
         table_create = open('table.pkl', 'wb')
-        table_dict = {tmpFileName:vals[2]}
+        table_dict = {vals[0]:vals[2]}
         pickle.dump(table_dict,table_create)
         table_create.close()
     else:
         table_dict = pickle.load(table)
         table.close()
         new_table = open('table.pkl', 'w+b')
-        if table_dict.has_key(tmpFileName):
+        if table_dict.has_key(vals[0]):
             "Duplicate? Should we not do anything?"
         else:
-            table_dict[tmpFileName] = vals[2]
+            table_dict[vals[0]] = vals[2]
         pickle.dump(table_dict, new_table)
         new_table.close()
     
     # send the write to GS
-    send_file(tmpFileName)
+    send_file(tmpFile.name, dstName);
 ################ WHILE 1 ######################################
 
-send_file('table.pkl')
+send_file('table.pkl', 'table.pkl')
 
 os.remove(fname)
 
