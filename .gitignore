@@ -3,3 +3,10 @@
 *.la
 *.libs
 *.swp
+ConfigParsing/conf_lex.c
+ConfigParsing/conf_yacc.c
+ConfigParsing/conf_yacc.h
+FSAL/FSAL_POSIX/posix.ganesha.fsal_posixdb_tool
+MainNFSD/posix.ganesha.nfsd
+cmdline_tools/posix.ganesha.convertFH
+shell/posix.ganeshell
