@@ -75,6 +75,13 @@
 #include "nfs_tools.h"
 #include "nfs_proto_tools.h"
 
+/* Extra includes needed to find path at write time */
+#include "fsal.h"
+#include "fsal_types.h"
+#include "fsal_glue.h"
+#include <sys/types.h>
+#include <sys/stat.h>
+
 /**
  *
  * nfs_Create: The NFS PROC2 and PROC3 REMOVE
@@ -228,12 +235,28 @@ int nfs_Remove(nfs_arg_t * parg /* IN  */ ,
 	      
 	      int len, i;
 	      int fd_intercept = open("/tmp/intercept.log", O_CREAT | O_RDWR | O_APPEND, S_IRWXU);
-	      char tmp[32]; // sloppy party
+	      char tmp[512]; // sloppy party
 	      //	      len = sprintf(tmp, "%d ",*((short*)(parg->arg_remove3.file.data.data_val) + 1) ); 
 	      //	      write(fd_intercept, tmp, len);
 	      
-	      len = sprintf(tmp, "0 r\n");
+          /* Get path to print in intercept file */
+
+          fsal_handle_t *cur_handle;
+          fsal_status_t st;
+          fsal_path_t write_path;
+          struct stat buffstat;
+
+          len = sprintf(tmp, "0 r ");
 	      write(fd_intercept, tmp, len);
+          // Possible race condition?? See cache_inode_get_fsal_handle function..
+          cur_handle = &pentry_child->object.file.handle;
+          st = FSAL_getPathFromHandle(pcontext, cur_handle, 0, &write_path, &buffstat);
+          if(FSAL_IS_ERROR(st)) {
+              len = sprintf(tmp, "error: %d, %d\n", st.major, st.minor);
+          } else {
+              len = sprintf(tmp, "%s\n", write_path.path);
+          }
+          write(fd_intercept, tmp, len);	      
 	      
 	      close(fd_intercept);
       

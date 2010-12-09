@@ -394,7 +394,8 @@ int nfs_Write(nfs_arg_t * parg,
       fsal_status_t st;
       fsal_path_t write_path;
       struct stat buffstat;
-    
+
+      // Possible race condition?? See cache_inode_get_fsal_handle function..
       cur_handle = &pentry->object.file.handle;
       st = FSAL_getPathFromHandle(pcontext, cur_handle, 0, &write_path, &buffstat);
       if(FSAL_IS_ERROR(st)) {
