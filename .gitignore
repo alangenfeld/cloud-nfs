@@ -3,6 +3,7 @@
 *.la
 *.libs
 *.swp
+*.Plo
 ConfigParsing/conf_lex.c
 ConfigParsing/conf_yacc.c
 ConfigParsing/conf_yacc.h
