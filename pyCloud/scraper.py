@@ -1,38 +1,11 @@
 #!/usr/bin/env python
 
-import boto
 import os
+import boto
 import tempfile
 import pickle
 import re
-
-#bucketName = "cloudnfs"
-bucketName = "cs699wisc_samanas"
-
-def send_file(srcName, dstName) :
-#   "Create source and destination URIs."
-    src_uri = boto.storage_uri(srcName, "file")
-    dst_uri = boto.storage_uri(bucketName, "gs")
-    
-#    "Create a new destination URI with the source file name as the object name."
-    new_dst_uri = dst_uri.clone_replace_name(dstName)
-    
-#    "Create a new destination key object."
-    dst_key = new_dst_uri.new_key()
-    
-#    "Retrieve the source key and create a source key object."
-    src_key = src_uri.get_key()
-    
-#    "Create a temporary file to hold your copy operation."
-    tmp = tempfile.TemporaryFile()
-    src_key.get_file(tmp)
-    tmp.seek(0)
-    
-#    "Upload the file."
-    dst_key.set_contents_from_file(tmp)
-
-    return
-
+import cloudnfs
 
 #########################################################################
 fname = "/tmp/intercept.log"
@@ -79,10 +52,10 @@ while 1: ################################################################
         new_table.close()
     
     # send the write to GS
-    send_file(tmpFile.name, dstName);
+    cloudnfs.send_file(tmpFile.name, dstName);
 ################ WHILE 1 ######################################
 
-send_file('table.pkl', 'table.pkl')
+cloudnfs.send_file('table.pkl', 'table.pkl')
 
 os.remove(fname)
 
