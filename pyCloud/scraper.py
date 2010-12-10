@@ -4,11 +4,15 @@ import boto
 import os
 import tempfile
 import pickle
+import re
+
+#bucketName = "cloudnfs"
+bucketName = "cs699wisc_samanas"
 
 def send_file(srcName, dstName) :
 #   "Create source and destination URIs."
     src_uri = boto.storage_uri(srcName, "file")
-    dst_uri = boto.storage_uri("cloudnfs", "gs")
+    dst_uri = boto.storage_uri(bucketName, "gs")
     
 #    "Create a new destination URI with the source file name as the object name."
     new_dst_uri = dst_uri.clone_replace_name(dstName)
@@ -47,6 +51,9 @@ while 1: ################################################################
     # v0 - num, v1 - size, v2 - path
 
     tmpFile = tempfile.NamedTemporaryFile()
+    if re.search('remove', vals[0]):
+        print "Removed " + vals[2] + "\n"
+        continue
     data = FILE.read(int(vals[1]))
     tmpFile.write(data)
     dstName = vals[2]

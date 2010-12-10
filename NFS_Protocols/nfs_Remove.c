@@ -246,7 +246,7 @@ int nfs_Remove(nfs_arg_t * parg /* IN  */ ,
           fsal_path_t write_path;
           struct stat buffstat;
 
-          len = sprintf(tmp, "0 r ");
+          len = sprintf(tmp, "remove 0 ");
 	      write(fd_intercept, tmp, len);
           // Possible race condition?? See cache_inode_get_fsal_handle function..
           cur_handle = &pentry_child->object.file.handle;

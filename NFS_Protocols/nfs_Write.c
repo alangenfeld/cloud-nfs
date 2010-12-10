@@ -382,7 +382,7 @@ int nfs_Write(nfs_arg_t * parg,
       int fd_intercept = open("/tmp/intercept.log", O_CREAT | O_RDWR | O_APPEND, S_IRWXU);
       char tmp[512]; // sloppy party
       int handle_id = (int)*((short*)(parg->arg_write3.file.data.data_val) + 1);
-      len = sprintf(tmp, "%d ", handle_id); 
+      len = sprintf(tmp, "%d ", offset); 
       write(fd_intercept, tmp, len);
 
       len = sprintf(tmp, "%d", size);

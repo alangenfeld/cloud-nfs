@@ -7,8 +7,8 @@ import tempfile
 import sys
 import glob
 
-#bucketName = "cs699wisc_samanas"
-bucketName = "cloudnfs"
+bucketName = "cs699wisc_samanas"
+#bucketName = "cloudnfs"
 
 def send_file(tmpFileName) :
 #   "Create source and destination URIs."
@@ -31,7 +31,6 @@ def send_file(tmpFileName) :
     
 #    "Upload the file."
     dst_key.set_contents_from_file(tmp)
-    os.remove(tmpFileName)
     return
 
 def walktree(top):

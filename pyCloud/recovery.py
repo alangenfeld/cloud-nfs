@@ -11,9 +11,12 @@ def read_file(fileName) :
     return
 
 # 
+#bucketName = cloudnfs
+bucketName = "cs699wisc_samanas"
+
 def download(srcName, dstName) :
     "Download the files."
-    src_uri = boto.storage_uri("cloudnfs/" + srcName, "gs")
+    src_uri = boto.storage_uri(bucketName + "/" + srcName, "gs")
     dst_uri = boto.storage_uri(dstName, "file")
     
     "Append the object name to the directory name."
